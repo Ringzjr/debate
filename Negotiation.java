@@ -6,7 +6,6 @@ import java.awt.event.*;
 
 public class Negotiation extends JFrame implements ActionListener
 {
-    private Page page; 
     private boolean loggedIn;
     private String userName;
     private String theme;
@@ -16,8 +15,15 @@ public class Negotiation extends JFrame implements ActionListener
 
 
 
-
-
+public Negotiation ()
+    {
+        
+    }
+    
+    
+    public void actionPerformed(ActionEvent e){
+        
+    }
 
 
 
