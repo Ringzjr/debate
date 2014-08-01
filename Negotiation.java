@@ -7,7 +7,7 @@ import java.awt.event.*;
 public class Negotiation extends JFrame implements ActionListener
 {
     private boolean loggedIn;
-    private String userName;
+    private String userName = "Anonymous";
     private String theme;
     private String[] interests;
     //private Page page // depending on how we set up the pages
@@ -28,6 +28,13 @@ public Negotiation ()
 
 
 
+public String getUserName(){
+return userName;
+}
+
+public void setUserName(String name){
+userName = name;
+}
 
 
 }
