@@ -15,8 +15,7 @@ public class Negotiation extends JFrame implements ActionListener
     //private Page page // depending on how we set up the pages
     
     public static void main(String[] args) throws IOException {
-        new Negotiation().append("counter.txt", "hey there");
-        
+
         
     }
 
@@ -111,11 +110,11 @@ public void addEntry(String title) throws FileNotFoundException, IOException{
     }
     
     
-    public String read(String filename) {
+    public String read(String filename) throws FileNotFoundException {
         //done
     Scanner read = new Scanner(new File(filename));
         String text = "";
-        while (read.hasNextLine) {
+        while (read.hasNextLine()) {
             text += read.nextLine();
         }
         
