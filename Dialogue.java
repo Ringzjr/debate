@@ -33,6 +33,7 @@ public class Dialogue extends JPanel implements ActionListener
     private JTextArea btext;
     private JTextArea comments;
     private JTextArea textenter;
+    private boolean debug = false;
     
     
     public Dialogue ()
@@ -47,13 +48,14 @@ public class Dialogue extends JPanel implements ActionListener
         
         
         comments = new JTextArea("comments");
+        comments.setPreferredSize(new Dimension(200, 200));
         comments.setEnabled(false);
         
-        atext = new JTextArea(20,20);
+        atext = new JTextArea(20, 20);
         atext.setEnabled(false);
         a.add(atext);
         
-        btext = new JTextArea(20,20);
+        btext = new JTextArea(20, 20);
         btext.setEnabled(false);
         b.add(btext);
         
@@ -61,7 +63,7 @@ public class Dialogue extends JPanel implements ActionListener
         b.add(btext);
         c.add(comments);
         
-        textenter = new JTextArea(5,5);
+        textenter = new JTextArea(1, 1);
         textenter.setText("Type Here");
         textenter.setEnabled(true);
         this.add(textenter);
@@ -79,31 +81,42 @@ public class Dialogue extends JPanel implements ActionListener
         enter.addActionListener(this);
         enter.setPreferredSize(new Dimension(2,2));
         this.add(enter);
+        this.setPreferredSize(new Dimension(1000,1000));
+        this.setLayout(new GridLayout(2,2));
 
     }
     
-    public Dialogue (String[] dinfo, Component n)
+    public Dialogue (String[] dinfo, Negotiation n) throws FileNotFoundException
     {
         //String dname, String afile, String bfile, String cfile
+        
+        
         this();
+        negotiation = n;
         id = Integer.parseInt(dinfo[0]);
         title = dinfo[1];
-        afile = dinfo[2];
+        afile = dinfo[2] + ".txt";
         userA = parseName(afile);
         
-        if (dinfo.length == 4){
-        bfile = dinfo[3];
+       this.initializeTextA(afile);
+      
+        if (dinfo.length == 5) {
+        bfile = dinfo[3] + ".txt";
         userB = parseName(bfile);
+       this.initializeTextB(bfile);
             
-        cfile = dinfo[4];
+        cfile = dinfo[4] + ".txt";
+        this.initializeComments(cfile);
+            
         }
         
-        else
-            cfile = dinfo[3];
+        else {
+            cfile = dinfo[3] + ".txt";
+           this.initializeComments(cfile);
+            
+        }
         
-        Component neg = n;
-        negotiation = (Negotiation)n;
-        
+       
         
         if (negotiation.getUserName().toLowerCase().equals(userA.toLowerCase()))
             mode = "A";
@@ -111,6 +124,16 @@ public class Dialogue extends JPanel implements ActionListener
             mode = "B";
         else
             mode = "C";
+        
+        if(debug) {
+            
+        System.out.println("User A: "+ userA);
+        System.out.println("User B: "+ userB);
+        System.out.println("Mode: "+ mode);
+        }
+
+        
+        
         
     }
     
@@ -123,11 +146,11 @@ public class Dialogue extends JPanel implements ActionListener
 
     
     
-    public static void main(String[] args){
+ /*   public static void main(String[] args) throws FileNotFoundException{
         
         
         Dialogue dialogue = new Dialogue();
-        dialogue.setNegotiation();
+       dialogue.setNegotiation();
         dialogue.setPreferredSize(new Dimension(1000,1000));
         dialogue.setLayout(new GridLayout(2,2));
         JFrame test = new JFrame("Testing Dialogue Panels");
@@ -138,7 +161,7 @@ public class Dialogue extends JPanel implements ActionListener
         test.setVisible(true);
         test.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
-    
+    */
     
     
     public void actionPerformed(ActionEvent e){
@@ -172,13 +195,43 @@ public class Dialogue extends JPanel implements ActionListener
     }
     
     
+    public void initializeTextA(String filename) throws FileNotFoundException {
+        System.out.println(filename);
+        atext.setText(negotiation.read(filename));
+        
+        
+    }
     
-    public void setNegotiation()
+    public void initializeTextB(String filename) throws FileNotFoundException{
+        System.out.println(filename);
+        btext.setText(negotiation.read(filename));
+        
+        
+    }
+    
+    public void initializeComments(String filename) throws FileNotFoundException{
+       /* String str = negotiation.read(filename);
+        String[] fin = str.split("\\n+");
+        String forreal = "";
+        for (String s: fin) {
+            forreal += s + "\n";
+        }
+        */
+        String forreal = negotiation.readComments(filename);
+            comments.setText(forreal);
+       
+        
+    }
+    
+    
+    
+    /*
+    public void setNegotiation() throws FileNotFoundException
     {
         negotiation = new Negotiation();
     }
     
-    
+    */
 
     
     

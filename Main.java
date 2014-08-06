@@ -7,23 +7,28 @@ import java.io.*;
 
 
 
-public class Main extends JPanel {
+public class Main extends JPanel implements ActionListener {
 
     
-    Component negotiation;
+    Negotiation negotiation;
     Scanner scanner;
     JButton createButton;
     File dialogues;
     File superinfo;
+    
+    
 
-    public Main(Component comp) throws FileNotFoundException {
+    public Main(Negotiation comp) throws FileNotFoundException {
         
         negotiation = comp;
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         //setLayout(new BorderLayout());
        // setLayout(null);
         setBorder(new EmptyBorder(100,100,100,100));
+        setVisible(true);
         add (createButton = new JButton("Create Dialogue"));
+        createButton.addActionListener(this);
+        createButton.setVisible(true);
         dialogues = new File("dialogues.txt");
         scanner = new Scanner(dialogues);
         
@@ -43,32 +48,15 @@ public class Main extends JPanel {
     
     
     
-    public void actionPerformed (ActionEvent e) throws FileNotFoundException, IOException {
-        
+    public void actionPerformed (ActionEvent e) {
+        //dinfo = id, dtitle, filename for a, filename for b, filename for c
         if (e.getSource().equals(createButton)) {
-       
-            //read the count number
-            Scanner read = new Scanner(new File("counter.txt"));
-            int count = Integer.parseInt(read.nextLine());
-            
-            //increment the count number
-            superinfo = new File("counter.txt");
-            FileWriter write = new FileWriter(superinfo);
-            PrintWriter printwriter = new PrintWriter(write);
-            printwriter.print(count++);
-            printwriter.close();
-            
-            //add a new entry to the dialogues file
-            try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter("dialogues.txt", true));
-            bw.newLine();
-           // bw.write(count+"");
-            bw.newLine();
-            bw.flush();
-            bw.close();
-            } catch (IOException o) {
-                
-            }
+            negotiation.addDialogue((new Dialogue()));
+            /*
+            //take care of this with popup (and increment)
+            negotiation.createFile(negotiation.getUserName()+"!"+.txt");
+            negotiation
+            */
             
         }
         

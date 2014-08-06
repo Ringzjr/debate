@@ -7,32 +7,46 @@ import java.util.*;
 // The negotiation class is the main class of this app. This is where info is cached, and controls what pages are brought up, and with what information.
 
 public class Negotiation extends JFrame implements ActionListener
+
 {
     private boolean loggedIn;
     private String userName = "Ringz";
     private String theme;
     private String[] interests;
+    private Main main;
+    private JPanel pane;
+    
     //private Page page // depending on how we set up the pages
     
+    
     public static void main(String[] args) throws IOException {
+        new Negotiation();
+    }
 
+    public void addDialogue(Dialogue d) {
+        pane.remove(main);
+        pane.add(d);
+        this.setPreferredSize(d.getPreferredSize());
+        pane.revalidate();
+        this.pack();
+        this.revalidate();
+        
+    }
+    public void actionPerformed(ActionEvent e) {
         
     }
 
 
-public Negotiation ()
-    
-    {
+    public Negotiation() throws FileNotFoundException {
+        this.setContentPane(pane = new JPanel());
+        this.setPreferredSize(new Dimension(500,500));
+        main = new Main(this);
+        pane.add(main);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.pack();
+        this.setVisible(true);
         
     }
-    
-    
-    public void actionPerformed(ActionEvent e){
-        
-    }
-
-
-
 
 public String getUserName(){
 return userName;
@@ -43,7 +57,7 @@ userName = name;
 }
 
     
-public void addEntry(String title) throws FileNotFoundException, IOException{
+public void addEntry(String title) throws FileNotFoundException, IOException {
     //increment counter
     int count = incrementCounter();
     //add a new entry to the dialogues file
@@ -112,7 +126,7 @@ public void addEntry(String title) throws FileNotFoundException, IOException{
     
     public String read(String filename) throws FileNotFoundException {
         //done
-    Scanner read = new Scanner(new File(filename));
+        Scanner read = new Scanner(new File(filename));
         String text = "";
         while (read.hasNextLine()) {
             text += read.nextLine();
@@ -123,7 +137,16 @@ public void addEntry(String title) throws FileNotFoundException, IOException{
         
     }
     
-    
+    public String readComments(String filename) throws FileNotFoundException {
+        Scanner read = new Scanner(new File(filename));
+        String text = "";
+        while (read.hasNextLine()) {
+            text += read.nextLine() + "\n";
+        }
+        return text;
+        
+        
+    }
     
     
     public void updateEntry(String id) throws FileNotFoundException {
