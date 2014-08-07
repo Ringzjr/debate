@@ -82,9 +82,9 @@ public class Dialogue extends JPanel implements ActionListener
 
     }
     
-    public Dialogue (String[] dinfo, Component n)
+    public Dialogue (String[] dinfo, Negotiation n)
     {
-        //String dname, String afile, String bfile, String cfile
+        //String ID, String dname, String afile, String bfile, String cfile
         this();
         id = Integer.parseInt(dinfo[0]);
         title = dinfo[1];
@@ -101,8 +101,7 @@ public class Dialogue extends JPanel implements ActionListener
         else
             cfile = dinfo[3];
         
-        Component neg = n;
-        negotiation = (Negotiation)n;
+        negotiation = n;
         
         
         if (negotiation.getUserName().toLowerCase().equals(userA.toLowerCase()))
