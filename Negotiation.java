@@ -10,7 +10,7 @@ public class Negotiation extends JFrame implements ActionListener
 
 {
     private boolean loggedIn;
-    private String userName = "Ringz";
+    private String userName = "elema";
     private String theme;
     private String[] interests;
     private Main main;
@@ -20,7 +20,7 @@ public class Negotiation extends JFrame implements ActionListener
     
     
     public static void main(String[] args) throws IOException {
-        new Negotiation();
+        new Negotiation().append("elema!1.txt", "apples");
     }
 
     public void addDialogue(Dialogue d) {
@@ -92,7 +92,7 @@ public void addEntry(String title) throws FileNotFoundException, IOException {
         try {
         BufferedWriter bw = new BufferedWriter(new FileWriter(filename, true));
         bw.newLine();
-        bw.write(text);
+        bw.write(text+"\n");
         bw.flush();
         bw.close();
         
@@ -149,32 +149,50 @@ public void addEntry(String title) throws FileNotFoundException, IOException {
     }
     
     
-    public void updateEntry(String id) throws FileNotFoundException {
+    public void updateEntry(String id) throws FileNotFoundException, IOException {
         //done
         //iterate through dialogues file, find that id
         //get the line in a string
         //split the string around that particular colon
         //and insert current username + id
         Scanner read = new Scanner(new File("dialogues.txt"));
+        String replacefrom = "";
+        String fin = "";
         while (read.hasNextLine()) {
             String line = read.nextLine();
             String[] split = line.split(":");
             if (split[0].equals(id)) {
-                String fin = "";
+                replacefrom = line;
+                fin = "";
                 for (int i = 0; i < 3; i++) {
                     fin += split[i]+":";
                 }
                 fin += userName+"!"+id+":";
                 fin += split[3];
-               System.out.println(fin);
+               
             }
         }
+        read.close();
+        
+        Scanner reader = new Scanner(new File("dialogues.txt"));
+        String full = "";
+        
+        while (reader.hasNextLine()) {
+            full += reader.nextLine() + "\n";
+        
+        }
+        reader.close();
+        full = full.replace(replacefrom, fin);
+        File done = new File("dialogues.txt");
+        FileWriter write = new FileWriter(done);
+        PrintWriter printwriter = new PrintWriter(write);
+        printwriter.print(full);
+        printwriter.close();
         
             
     }
    
-        
-        
+    
         
 
 

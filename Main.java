@@ -49,7 +49,7 @@ public class Main extends JPanel implements ActionListener {
     
     
     public void actionPerformed (ActionEvent e) {
-        //dinfo = id, dtitle, filename for a, filename for b, filename for c
+        //dinfo = id, dtitle, username a, username b, comments+id
         if (e.getSource().equals(createButton)) {
             negotiation.addDialogue((new Dialogue()));
             /*

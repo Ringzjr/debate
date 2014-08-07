@@ -24,6 +24,7 @@ public class Dialogue extends JPanel implements ActionListener
     private int id = 0;
     private String userA = "";
     private String userB = "";
+    private String[] info;
     
     private JPanel a;
     private JPanel b;
@@ -92,6 +93,7 @@ public class Dialogue extends JPanel implements ActionListener
         
         
         this();
+        info = dinfo;
         negotiation = n;
         id = Integer.parseInt(dinfo[0]);
         title = dinfo[1];
@@ -179,18 +181,24 @@ public class Dialogue extends JPanel implements ActionListener
     }
     
     private void addA(){
-        atext.setText(atext.getText() + "\n\n" + textenter.getText());
+        String text;
+        atext.setText(text = atext.getText() + textenter.getText() + "\n\n");
+        negotiation.append(info[2]+".txt", text);
         
     }
     
     private void addB(){
-        btext.setText(btext.getText() + "\n\n" + textenter.getText());
-        
+        String text;
+        btext.setText(text = btext.getText() + textenter.getText() + "\n\n");
+        negotiation.append(info[3]+".txt", text);
     }
     
     private void addC(){
-        comments.setText(comments.getText() + "\n\n" + negotiation.getUserName() +
+        String text;
+        comments.setText(text = comments.getText() + "\n\n" + negotiation.getUserName() +
                           ":\n" + textenter.getText());
+        int index = info.length-1;
+        negotiation.append(info[index]+".txt", text);
         
     }
     
@@ -222,7 +230,6 @@ public class Dialogue extends JPanel implements ActionListener
        
         
     }
-    
     
     
     /*
