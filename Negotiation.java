@@ -36,12 +36,26 @@ public class Negotiation extends JFrame implements ActionListener
         
     }
     public void actionPerformed(ActionEvent e) {
+        String action = e.getActionCommand();
+        JOptionPane message = new JOptionPane();
+        Popup pop;
+        if (action.equals("login")){
+            pop = new Popup("login");
+            message.showMessageDialog(null, pop);
+        }
+        else pop = null;
         
     }
 
 
     public Negotiation() throws FileNotFoundException {
-        this.set
+        this.setJMenuBar(navigation);
+        JMenuItem login = new JMenuItem("Login");
+        login.addActionListener(this);
+        login.setActionCommand("login");
+        JMenuItem profile = new JMenuItem("Profile");
+        navigation.add(login); navigation.add(profile);
+        
         
         this.setContentPane(pane = new JPanel());
         this.setPreferredSize(new Dimension(500,500));
