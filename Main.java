@@ -15,6 +15,7 @@ public class Main extends JPanel implements ActionListener {
     JButton createButton;
     File dialogues;
     File superinfo;
+    JOptionPane message;
     
     
 
@@ -51,6 +52,12 @@ public class Main extends JPanel implements ActionListener {
     public void actionPerformed (ActionEvent e) {
         //dinfo = id, dtitle, username a, username b, comments+id
         if (e.getSource().equals(createButton)) {
+            new Popup("title");
+            
+            
+            
+            message = new JOptionPane();
+            message.showMessageDialog(null, new Popup("title"));
             negotiation.addDialogue((new Dialogue()));
             /*
             //take care of this with popup (and increment)
