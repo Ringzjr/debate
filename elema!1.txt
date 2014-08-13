@@ -1,2 +1,16 @@
-hello
-apples
+Hi, I'm elema. This is a long paragraph. In dialogue,
+the text is printing without newlines.The text from 
+person b was also printed in the comments.
+We need a way to separate the paragraphs.
+
+
+Hi, I'm elema. This is a long paragraph. In dialogue,
+the text is printing without newlines.The text from 
+person b was also printed in the comments.
+We need a way to separate the paragraphs.
+
+
+Wahahahaha, here is another paragraph. Yeeee, hoo
+whooooouuuuuuuuuwhoooooooooooooooosdflkjdf.
+
+
