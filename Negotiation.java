@@ -10,17 +10,20 @@ public class Negotiation extends JFrame implements ActionListener
 
 {
     private boolean loggedIn;
-    private String userName = "elema";
+    private String userName = "Anonymous";
     private String theme;
     private String[] interests;
     private Main main;
     private JPanel pane;
     
+    private JMenuBar navigation = new JMenuBar();
+    //login/username profile
+    
     //private Page page // depending on how we set up the pages
     
     
     public static void main(String[] args) throws IOException {
-        new Negotiation().append("elema!1.txt", "apples");
+        new Negotiation();
     }
 
     public void addDialogue(Dialogue d) {
@@ -38,6 +41,8 @@ public class Negotiation extends JFrame implements ActionListener
 
 
     public Negotiation() throws FileNotFoundException {
+        this.set
+        
         this.setContentPane(pane = new JPanel());
         this.setPreferredSize(new Dimension(500,500));
         main = new Main(this);
