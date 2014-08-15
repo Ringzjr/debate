@@ -52,18 +52,30 @@ public class Main extends JPanel implements ActionListener {
     public void actionPerformed (ActionEvent e) {
         //dinfo = id, dtitle, username a, username b, comments+id
         if (e.getSource().equals(createButton)) {
+            try {
             new Popup("title");
-            
-            
-            
             message = new JOptionPane();
-            message.showMessageDialog(null, new Popup("title"));
-            negotiation.addDialogue((new Dialogue()));
+            Popup popup = new Popup("title");
+            message.showMessageDialog(null, popup);
+            negotiation.addEntry(popup.getTitle());
+            String[] dinfo = new String[4];
+            dinfo[0] = Integer.toString(negotiation.getCount());
+            dinfo[1] = popup.getTitle();
+            dinfo[2] = negotiation.getUserName()+"!"+dinfo[0];
+            dinfo[3] = "comments"+dinfo[0];
+            negotiation.createFile(dinfo[2] + ".txt");
+            negotiation.createFile(dinfo[3]+".txt");
+            negotiation.addDialogue(new Dialogue(dinfo, negotiation));
             /*
             //take care of this with popup (and increment)
             negotiation.createFile(negotiation.getUserName()+"!"+.txt");
             negotiation
             */
+            } catch (Exception o) {
+                o.printStackTrace();
+                
+                
+            }
             
         }
         

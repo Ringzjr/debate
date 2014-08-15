@@ -47,6 +47,13 @@ public class Negotiation extends JFrame implements ActionListener
         
     }
 
+    
+    public int getCount() throws FileNotFoundException {
+        Scanner read = new Scanner(new File("counter.txt"));
+        int count = Integer.parseInt(read.nextLine());
+        return count;
+        
+    }
 
     public Negotiation() throws FileNotFoundException {
         this.setJMenuBar(navigation);
